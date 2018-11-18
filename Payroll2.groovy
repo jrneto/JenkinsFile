@@ -8,6 +8,7 @@ pipeline {
             steps {
                 echo 'Building...'
                 echo "Branch ${params.branch}"
+                
             }
         }
         stage('Test') {
