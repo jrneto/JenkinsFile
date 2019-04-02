@@ -13,13 +13,13 @@ pipeline {
     }
 
     environment{
-        solution_name = 'SACI.sln'
-        assembly_name_hml = 'SACI - Homologacao'
-        assembly_name_prd = 'SACI - Sistema Atendimento ao Cliente Interm\u00E9dica - v.1.0'
+        solution_name = 'SEFAT.sln'
+        assembly_name_hml = 'SFI - Homologacao_CIT'
+        assembly_name_prd = 'SEFAT - Sistema de Faturamento - v.4.0'
 
-        repositorio_gndi_ci = "${env.WORKSPACE}\\cit-gndi-ci"
+        repositorio_gndi_ci = "${env.WORKSPACE}\\JenkinsFile"
         repositorio_gndi_svn = "${env.WORKSPACE}\\cit-gndi-svn-branches\\${params.BRANCH_NAME}"
-        remote_url = "https://192.168.20.242/svn/CADASTRO/SACI/branches/${params.BRANCH_NAME}"
+        remote_url = "https://192.168.20.242/svn/SEFAT/SFI/branches/${params.BRANCH_NAME}"
 
         build_solution = "${env.repositorio_gndi_svn}\\${env.solution_name}"
         build_arguments = "/t:Publish /p:configuration=Release /p:assemblyname=\"${env.assembly_name_prd}\" /m:4 /v:quiet"
@@ -35,7 +35,7 @@ pipeline {
                                         branches: [[name: '*/master']], 
                                         doGenerateSubmoduleConfigurations: false, 
                                         extensions: [[$class: 'CloneOption', noTags: true, reference: '', shallow: true]],
-                                        userRemoteConfigs: [[credentialsId: 'ssh-int-jenkins', url: 'git@bitbucket.org:ciandt_it/cit-gndi-ci.git']]])
+                                        userRemoteConfigs: [[credentialsId: 'ssh-int-jenkins', url: 'https://github.com/jrneto/JenkinsFile.git']]])
                 }
             }
         }
@@ -64,15 +64,15 @@ pipeline {
             }
         }
 
-        stage('Build & Sonar') {
+        /*stage('Build & Sonar') {
             steps{
                 bat """ 
-                    \"${tool 'Scanner MsBuild 5'}\\SonarScanner.MSBuild.exe\" begin /k:\"SACI\" /v:${params.BRANCH_NAME}
+                    \"${tool 'Scanner MsBuild 5'}\\SonarScanner.MSBuild.exe\" begin /k:\"SFI\" /v:${params.BRANCH_NAME}
                     \"${tool 'Msbuild 2017'}\\MSBuild.exe\" \"${env.build_solution}\" ${env.build_arguments}
                     \"${tool 'Scanner MsBuild 5'}\\SonarScanner.MSBuild.exe\" end
                     """
             }
-        }
+        }*/
     }
     post {
         always {
