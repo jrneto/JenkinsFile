@@ -66,7 +66,13 @@ pipeline {
                 }
             }
         }
-
+        stage('Build') {
+            steps{
+                bat """                     
+                    MSBuild.exe \"${env.build_solution}\" ${env.build_arguments}                    
+                    """
+            }
+        }
         /*stage('Build & Sonar') {
             steps{
                 bat """ 
@@ -82,7 +88,7 @@ pipeline {
             echo "Build nro. ${env.BUILD_NUMBER} finalizada!"
         }
         success {
-            echo "A branch ${params.BRANCH_NAME} passou nos testes de qualidade definidas no SonarQube."
+            echo "O build da branch ${params.BRANCH_NAME} foi realizado com sucesso!"
         }
         failure {
             echo "Falha no processo de build. Analise o console log do build ${env.BUILD_NUMBER}"
