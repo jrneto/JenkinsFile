@@ -35,7 +35,8 @@ pipeline {
                                         branches: [[name: '*/master']], 
                                         doGenerateSubmoduleConfigurations: false, 
                                         extensions: [[$class: 'CloneOption', noTags: true, reference: '', shallow: true]],
-                                        userRemoteConfigs: [[credentialsId: 'ssh-int-jenkins', url: 'https://github.com/jrneto/JenkinsFile.git']]])
+                                        userRemoteConfigs: [[credentialsId: 'gitCredential', url: 'https://github.com/jrneto/JenkinsFile.git']]])
+                    
                 }
             }
         }
@@ -43,23 +44,25 @@ pipeline {
         stage('Checkout SVN - Branch'){
             steps{
                 dir(env.repositorio_gndi_svn){
-                    script{
-                        checkout(   [  $class: 'SubversionSCM', 
-                                        locations: [[   credentialsId: 'svnGNDICredential', 
-                                                        depthOption: 'infinity',
-                                                        ignoreExternalsOption: true,
-                                                        local: ".",
-                                                        remote: "${env.remote_url}"]], 
-                                        additionalCredentials: [], 
-                                        excludedCommitMessages: '', 
-                                        excludedRegions: '', 
-                                        excludedRevprop: '', 
-                                        excludedUsers: '', 
-                                        filterChangelog: true, 
-                                        ignoreDirPropChanges: false, 
-                                        includedRegions: '', 
-                                        workspaceUpdater: [$class: 'UpdateWithCleanUpdater']])
-                    }
+                    
+                    checkout( changelog: false, 
+                                   poll: false, 
+                                   scm: [ $class: 'SubversionSCM', 
+                                          additionalCredentials: [], e
+                                          xcludedCommitMessages: '', 
+                                          excludedRegions: '', 
+                                          excludedRevprop: '', 
+                                          excludedUsers: '', 
+                                          filterChangelog: false, 
+                                          ignoreDirPropChanges: false, 
+                                          includedRegions: '', 
+                                          locations: [[cancelProcessOnExternalsFail: true, 
+                                                       credentialsId: 'svnCredential', 
+                                                       depthOption: 'infinity', 
+                                                       ignoreExternalsOption: true, 
+                                                       remote: '${env.remote_url}']], 
+                                          quietOperation: true, 
+                                          workspaceUpdater: [$class: 'UpdateWithCleanUpdater']] )                                       
                 }
             }
         }
