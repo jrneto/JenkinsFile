@@ -35,7 +35,7 @@ pipeline {
                                         branches: [[name: '*/master']], 
                                         doGenerateSubmoduleConfigurations: false, 
                                         extensions: [[$class: 'CloneOption', noTags: true, reference: '', shallow: true]],
-                                        userRemoteConfigs: [[credentialsId: 'gitCredential', url: 'https://github.com/jrneto/JenkinsFile.git']]])
+                                        userRemoteConfigs: [[credentialsId: 'myGitCredential', url: 'https://github.com/jrneto/JenkinsFile.git']]])
                     
                 }
             }
