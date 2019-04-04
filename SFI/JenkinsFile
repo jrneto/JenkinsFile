@@ -22,7 +22,7 @@ pipeline {
         //repositorio_gndi_ci = "C:\\git_jrneto\\JenkinsFile"
         //repositorio_gndi_svn = "C:\\SVN\\SEFAT\\SFI\\branches"
         repositorio_gndi_ci = "${env.WORKSPACE}\\SFI\\cit-gndi-ci"
-        repositorio_gndi_svn = "${env.WORKSPACE}\\cit-gndi-svn-branches\\${params.BRANCH_NAME}"
+        repositorio_gndi_svn = "${env.WORKSPACE}\\cit-gndi-svn-branches"
         local_branch = "${repositorio_gndi_svn}\\${params.BRANCH_NAME}"
         remote_url = "https://192.168.20.242/svn/SEFAT/SFI/branches/${params.BRANCH_NAME}"
 
