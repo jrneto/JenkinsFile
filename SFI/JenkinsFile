@@ -19,6 +19,7 @@ pipeline {
 
         repositorio_gndi_ci = "C:\\git_jrneto\\JenkinsFile"
         repositorio_gndi_svn = "C:\\SVN\\SEFAT\\SFI\\branches"
+        local_branch = "${repositorio_gndi_svn}\\${params.BRANCH_NAME}"
         remote_url = "https://192.168.20.242/svn/SEFAT/SFI/branches/${params.BRANCH_NAME}"
 
         build_solution = "${env.repositorio_gndi_svn}\\${env.solution_name}"
@@ -104,16 +105,14 @@ pipeline {
             }
         }*/
         
-        stage('Antes do build') {
-            steps {
-                echo 'Antes do build...'
-            }
-        }  
+        
         stage('Build') {
             steps{
-                bat """                     
-                    MSBuild.exe \"${env.build_solution}\" ${env.build_arguments}                    
-                    """
+                dir(env.local_branch){
+                    bat """                     
+                        MSBuild.exe \"${env.build_solution}\" ${env.build_arguments}                    
+                        """
+                }
             }
         }
         /*stage('Build & Sonar') {
