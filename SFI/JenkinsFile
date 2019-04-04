@@ -27,7 +27,7 @@ pipeline {
         remote_url = "https://192.168.20.242/svn/SEFAT/SFI/branches/${params.BRANCH_NAME}"
 
         build_solution = "${env.local_branch}\\${env.solution_name}"
-        build_arguments = "/t:Publish /p:configuration=Release /p:OutputPath=\"${env.path_hml}\" /p:assemblyname=\"${env.assembly_name_prd}\" /m:4 /v:quiet"
+        build_arguments = "/t:Publish /p:configuration=Release /p:InstallURL=\"${env.path_hml}\" /p:assemblyname=\"${env.assembly_name_hml}\" /m:4 /v:quiet"
 	}
 
     stages {
@@ -62,7 +62,7 @@ pipeline {
             }
         }
         */
-        stage('Checkout SVN - Branch'){
+        stage('Checkout SVN - Branch'){            
             steps{
                 dir(env.repositorio_gndi_svn){
                     
@@ -87,30 +87,16 @@ pipeline {
                 }
             }
         }
-        /*stage('Checkout SVN2 - Branch'){
+        stage('Valida Versão Aplicação'){
             steps{
-                checkout( [ $class: 'SubversionSCM', 
-                            additionalCredentials: [], 
-                            excludedCommitMessages: '', 
-                            excludedRegions: '', 
-                            excludedRevprop: '', 
-                            excludedUsers: '', 
-                            filterChangelog: false, 
-                            ignoreDirPropChanges: false, 
-                            includedRegions: '', 
-                            locations: [[cancelProcessOnExternalsFail: true, 
-                                        credentialsId: 'svnCredential', 
-                                        depthOption: 'infinity', 
-                                        ignoreExternalsOption: true, 
-                                        local: "${env.repositorio_gndi_svn}", 
-                                        remote: "${env.remote_url}"]], 
-                            quietOperation: true,
-                            workspaceUpdater: [$class: 'CheckoutUpdater']])
+                echo 'TODO Validando versão...'
+                echo 'Versão PRD: XXX'
+                echo 'Versão Deploy: XXX + 1'
             }
-        }*/
+        }
         
         
-        stage('Build') {
+        stage('Build e Deploy') {
             steps{
                 dir(env.local_branch){
                     bat """                     
