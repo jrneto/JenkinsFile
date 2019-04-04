@@ -18,7 +18,7 @@ pipeline {
         assembly_name_prd = 'SEFAT - Sistema de Faturamento - v.4.0'
 
         repositorio_gndi_ci = "C:\\git_jrneto\\JenkinsFile"
-        repositorio_gndi_svn = "C:\\SVN\\SEFAT\\SFI\\branches\\${params.BRANCH_NAME}"
+        repositorio_gndi_svn = "C:\\SVN\\SEFAT\\SFI\\branches"
         remote_url = "https://192.168.20.242/svn/SEFAT/SFI/branches/${params.BRANCH_NAME}"
 
         build_solution = "${env.repositorio_gndi_svn}\\${env.solution_name}"
@@ -57,7 +57,7 @@ pipeline {
             }
         }
         */
-        /*stage('Checkout SVN - Branch'){
+        stage('Checkout SVN - Branch'){
             steps{
                 dir(env.repositorio_gndi_svn){
                     
@@ -76,13 +76,13 @@ pipeline {
                                                        credentialsId: 'svnCredential', 
                                                        depthOption: 'infinity', 
                                                        ignoreExternalsOption: true, 
-                                                       remote: ${env.remote_url}]], 
+                                                       remote: "${env.remote_url"}]], 
                                           quietOperation: true, 
                                           workspaceUpdater: [$class: 'UpdateWithCleanUpdater']] )                                       
                 }
             }
-        }*/
-        stage('Checkout SVN2 - Branch'){
+        }
+        /*stage('Checkout SVN2 - Branch'){
             steps{
                 checkout( [ $class: 'SubversionSCM', 
                             additionalCredentials: [], 
@@ -102,7 +102,7 @@ pipeline {
                             quietOperation: true,
                             workspaceUpdater: [$class: 'CheckoutUpdater']])
             }
-        }
+        }*/
         
         stage('Antes do build') {
             steps {
