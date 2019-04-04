@@ -76,7 +76,7 @@ pipeline {
                                                        credentialsId: 'svnCredential', 
                                                        depthOption: 'infinity', 
                                                        ignoreExternalsOption: true, 
-                                                       remote: "${env.remote_url"}]], 
+                                                       remote: "${env.remote_url}"]], 
                                           quietOperation: true, 
                                           workspaceUpdater: [$class: 'UpdateWithCleanUpdater']] )                                       
                 }
