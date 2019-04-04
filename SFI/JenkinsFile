@@ -22,7 +22,7 @@ pipeline {
         local_branch = "${repositorio_gndi_svn}\\${params.BRANCH_NAME}"
         remote_url = "https://192.168.20.242/svn/SEFAT/SFI/branches/${params.BRANCH_NAME}"
 
-        build_solution = "${env.repositorio_gndi_svn}\\${env.solution_name}"
+        build_solution = "${env.local_branch}\\${env.solution_name}"
         build_arguments = "/t:Publish /p:configuration=Release /p:assemblyname=\"${env.assembly_name_prd}\" /m:4 /v:quiet"
 	}
 
