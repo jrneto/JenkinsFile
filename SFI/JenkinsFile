@@ -14,11 +14,15 @@ pipeline {
 
     environment{
         solution_name = 'SEFAT.sln'
-        assembly_name_hml = 'SFI - Homologacao_CIT'
+        assembly_name_hml = 'SFI - Homolog_CIT'
         assembly_name_prd = 'SEFAT - Sistema de Faturamento - v.4.0'
+        path_hml = '\\ISS001W2PAS04\Sistemas\SEFAT\HOMOLOGACAO\SFI_CIT'
+        path_prd = '\\ISS001W2PAS04\Sistemas\SEFAT\Executaveis\SEFAT_FW4'
 
-        repositorio_gndi_ci = "C:\\git_jrneto\\JenkinsFile"
-        repositorio_gndi_svn = "C:\\SVN\\SEFAT\\SFI\\branches"
+        //repositorio_gndi_ci = "C:\\git_jrneto\\JenkinsFile"
+        //repositorio_gndi_svn = "C:\\SVN\\SEFAT\\SFI\\branches"
+        repositorio_gndi_ci = "${env.WORKSPACE}\\SFI\\cit-gndi-ci"
+        repositorio_gndi_svn = "${env.WORKSPACE}\\cit-gndi-svn-branches\\${params.BRANCH_NAME}"
         local_branch = "${repositorio_gndi_svn}\\${params.BRANCH_NAME}"
         remote_url = "https://192.168.20.242/svn/SEFAT/SFI/branches/${params.BRANCH_NAME}"
 
