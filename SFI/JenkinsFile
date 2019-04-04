@@ -41,6 +41,12 @@ pipeline {
         //    }
         //}
 
+	stage('Test') {
+            steps {
+                echo 'Testing..'
+            }
+        }    
+	    
         stage('Checkout GIT - CI'){
             steps{
                  dir(env.repositorio_gndi_ci){
