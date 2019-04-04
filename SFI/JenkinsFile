@@ -82,6 +82,11 @@ pipeline {
                 }
             }
         }
+        stage('Antes do build') {
+            steps {
+                echo 'Antes do build...'
+            }
+        }  
         stage('Build') {
             steps{
                 bat """                     
