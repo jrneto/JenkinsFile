@@ -17,7 +17,7 @@ pipeline {
         assembly_name_hml = 'SFI - Homologacao_CIT'
         assembly_name_prd = 'SEFAT - Sistema de Faturamento - v.4.0'
 
-        repositorio_gndi_ci = "C:\\Program Files (x86)\\Jenkins\\JenkinsFile"
+        repositorio_gndi_ci = "C:\\git_jrneto\\JenkinsFile"
         repositorio_gndi_svn = "${env.WORKSPACE}\\cit-gndi-svn-branches\\${params.BRANCH_NAME}"
         remote_url = "https://192.168.20.242/svn/SEFAT/SFI/branches/${params.BRANCH_NAME}"
 
@@ -26,18 +26,28 @@ pipeline {
 	}
 
     stages {
+        //stage('Checkout GIT - CI'){
+        //    steps{
+        //        dir(env.repositorio_gndi_ci){
+        //            checkout(   changelog: false, 
+        //                        poll: false, 
+        //                        scm: [ $class: 'GitSCM', 
+        //                                branches: [[name: '*/master']], 
+        //                                doGenerateSubmoduleConfigurations: false, 
+        //                               extensions: [[$class: 'CloneOption', noTags: true, reference: '', shallow: true]],
+        //                                userRemoteConfigs: [[credentialsId: 'myGitCredential', url: 'https://github.com/jrneto/JenkinsFile.git']]])
+        //            
+        //        }
+        //    }
+        //}
+
         stage('Checkout GIT - CI'){
             steps{
-                dir(env.repositorio_gndi_ci){
-                    checkout(   changelog: false, 
-                                poll: false, 
-                                scm: [ $class: 'GitSCM', 
-                                        branches: [[name: '*/master']], 
-                                        doGenerateSubmoduleConfigurations: false, 
-                                        extensions: [[$class: 'CloneOption', noTags: true, reference: '', shallow: true]],
-                                        userRemoteConfigs: [[credentialsId: 'myGitCredential', url: 'https://github.com/jrneto/JenkinsFile.git']]])
-                    
-                }
+                 dir(env.repositorio_gndi_ci){
+                     git branch: 'master',
+                         credentialsId: 'myGitCredential',
+                         url: 'https://github.com/jrneto/JenkinsFile.git'
+                 } 
             }
         }
 
