@@ -83,23 +83,25 @@ pipeline {
             }
         }*/
         stage('Checkout SVN2 - Branch'){
-            checkout( [ $class: 'SubversionSCM', 
-                        additionalCredentials: [], 
-                        excludedCommitMessages: '', 
-                        excludedRegions: '', 
-                        excludedRevprop: '', 
-                        excludedUsers: '', 
-                        filterChangelog: false, 
-                        ignoreDirPropChanges: false, 
-                        includedRegions: '', 
-                        locations: [[cancelProcessOnExternalsFail: true, 
-                                     credentialsId: 'svnCredential', 
-                                     depthOption: 'infinity', 
-                                     ignoreExternalsOption: true, 
-                                     local: "${env.repositorio_gndi_svn}", 
-                                     remote: "${env.remote_url}"]], 
-                        quietOperation: true,
-                         workspaceUpdater: [$class: 'CheckoutUpdater']])
+            steps{
+                checkout( [ $class: 'SubversionSCM', 
+                            additionalCredentials: [], 
+                            excludedCommitMessages: '', 
+                            excludedRegions: '', 
+                            excludedRevprop: '', 
+                            excludedUsers: '', 
+                            filterChangelog: false, 
+                            ignoreDirPropChanges: false, 
+                            includedRegions: '', 
+                            locations: [[cancelProcessOnExternalsFail: true, 
+                                        credentialsId: 'svnCredential', 
+                                        depthOption: 'infinity', 
+                                        ignoreExternalsOption: true, 
+                                        local: "${env.repositorio_gndi_svn}", 
+                                        remote: "${env.remote_url}"]], 
+                            quietOperation: true,
+                            workspaceUpdater: [$class: 'CheckoutUpdater']])
+            }
         }
         
         stage('Antes do build') {
