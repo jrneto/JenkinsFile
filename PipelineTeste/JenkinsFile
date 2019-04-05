@@ -2,7 +2,7 @@ pipeline {
     agent any
     parameters {
         string(name: 'Branch_APP', defaultValue: 'FB_GEVO-', description: 'Branch da aplicação')
-        choice(name: 'Aplicação', defaultValue: '', description: 'Informe a aplicação', choices: [SFI,SCI,SVI])
+        choice(name: 'Aplicação', defaultValue: '', description: 'Informe a aplicação', choices: ['SFI','SCI','SVI'])
     }
     stages {
         stage('Build') {
