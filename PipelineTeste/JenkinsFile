@@ -2,8 +2,8 @@ pipeline {
     agent any
     parameters {
         string(name: 'Branch_APP', defaultValue: 'FB_GEVO-', description: 'Branch da aplicação')
-        choice(name: 'Aplicacao', defaultValue: '', description: 'Informe a aplicação', choices: ['SFI','SCI','SVI'])
-        choice(name: 'Ambiente', defaultValue: '', description: 'Informe o ambiente de deploy', choices: ['QA','Homolog','PRD'])
+        choice(name: 'Aplicacao',   description: 'Informe a aplicação', choices: ['SFI','SCI','SVI'])
+        choice(name: 'Ambiente',   description: 'Informe o ambiente de deploy', choices: ['QA','Homolog','PRD'])
     }
     stages {
         stage('Build') {
