@@ -2,24 +2,38 @@ pipeline {
     agent any
     parameters {
         string(name: 'Branch_APP', defaultValue: 'FB_GEVO-', description: 'Branch da aplicação')
-        choice(name: 'Aplicação', defaultValue: '', description: 'Informe a aplicação', choices: ['SFI','SCI','SVI'])
+        choice(name: 'Aplicacao', defaultValue: '', description: 'Informe a aplicação', choices: ['SFI','SCI','SVI'])
+        choice(name: 'Ambiente', defaultValue: '', description: 'Informe o ambiente de deploy', choices: ['QA','Homolog','PRD'])
     }
     stages {
         stage('Build') {
             steps {
                 echo 'Building..'
-                echo "${params.Greeting} World!"
+                echo "Aplicacao: ${params.Aplicacao}"                
             }
         }
         stage('Test') {
             steps {
                 echo 'Testing..'
+                echo 'Parabéns, teste OK!!'
             }
         }
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
+                echo "Deploy realizado no Ambiente: ${params.Ambiente}"
             }
+        }
+    }
+    post {
+        always {
+            echo "Build finalizada!"
+        }
+        success {
+            echo "O build foi realizado com sucesso!"
+        }
+        failure {
+            echo "Falha no processo de build. Analise o console log do build."
         }
     }
 }
