@@ -30,6 +30,13 @@ pipeline {
         build_solution = "${env.local_branch}\\${env.solution_name}"
         build_arguments = "/t:Publish /p:configuration=Debug /p:UpdateURL=\"${env.path_hml}\" /p:assemblyname=\"${env.assembly_name_hml}\" /m:4 /v:quiet"
         //build_arguments = "/t:Publish /p:configuration=Debug  /p:assemblyname=\"${env.assembly_name_hml}\" /m:4 /v:quiet"
+        script {
+            if (params.Ambiente == 'Homolog') {
+                    build_arguments = "/t:Publish /p:configuration=Debug /p:UpdateURL=\"${env.path_hml}\" /p:assemblyname=\"${env.assembly_name_hml}\" /m:4 /v:quiet"
+            } else {
+                    build_arguments = "/t:Publish /p:configuration=Debug /p:UpdateURL=\"${env.path_prd}\" /p:assemblyname=\"${env.assembly_name_prd}\" /m:4 /v:quiet"
+            }
+        }   
 	}
     
     stages {
