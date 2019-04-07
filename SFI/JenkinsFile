@@ -72,7 +72,14 @@ pipeline {
         
         stage('Build e Deploy') {
             steps{
-                dir(env.local_branch){                    
+                dir(env.local_branch){  
+                    script {
+                        if (params.Ambiente == 'Homolog') {
+                                echo '### Homologacao'
+                        } else {
+                                echo '### Outro'
+                        }
+                    }                  
                     bat """                                             
                         MSBuild.exe \"${env.build_solution}\" ${env.build_arguments}                    
                         """
