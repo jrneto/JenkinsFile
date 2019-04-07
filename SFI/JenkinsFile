@@ -69,7 +69,7 @@ pipeline {
         }
         
         
-        /*stage('Build e Deploy') {
+        stage('Build e Deploy') {
             steps{
                 dir(env.local_branch){                    
                     bat """                                             
@@ -77,7 +77,8 @@ pipeline {
                         """
                 }
             }
-        }*/
+        }
+        /*
         stage('Build & Sonar') {
             steps{
                 bat """ 
@@ -87,6 +88,7 @@ pipeline {
                     """
             }
         }
+        */
     }
     post {
         always {
