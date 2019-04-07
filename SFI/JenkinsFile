@@ -69,7 +69,7 @@ pipeline {
         }
         
         
-        stage('Build e Deploy') {
+        /*stage('Build e Deploy') {
             steps{
                 dir(env.local_branch){                    
                     bat """                                             
@@ -77,12 +77,12 @@ pipeline {
                         """
                 }
             }
-        }
+        }*/
         stage('Build & Sonar') {
             steps{
                 bat """ 
                    SonarScanner.MSBuild.exe begin /k:\"SFI\" /d:sonar.host.url=\"http://localhost:9000\" /d:sonar.login=\"e87117cfbcc7251ffd0ab3f2716d7e12d6ec5d2c\"
-                   MSBuild.exe\" \"${env.build_solution}\" ${env.build_arguments}
+                   MSBuild.exe \"${env.build_solution}\" ${env.build_arguments}
                    SonarScanner.MSBuild.exe\" end
                     """
             }
