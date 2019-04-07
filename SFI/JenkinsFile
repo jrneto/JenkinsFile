@@ -30,7 +30,7 @@ pipeline {
         build_solution = "${env.local_branch}\\${env.solution_name}"
         build_arguments = "/t:Publish /p:configuration=Debug /p:UpdateURL=\"${env.path_hml}\" /p:assemblyname=\"${env.assembly_name_hml}\" /m:4 /v:quiet"
         //build_arguments = "/t:Publish /p:configuration=Debug  /p:assemblyname=\"${env.assembly_name_hml}\" /m:4 /v:quiet"
-        ambiente = params.Ambiente
+        ambiente = ${params.Ambiente}
 	}
     
     stages {
