@@ -87,7 +87,7 @@ pipeline {
                     """
             }
         }
-    
+    }
     post {
         always {
             echo "Build nro. ${env.BUILD_NUMBER} finalizada!"
