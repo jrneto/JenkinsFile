@@ -75,7 +75,7 @@ pipeline {
             steps{
                 dir(env.local_branch){  
                     script {
-                        if (params.Ambiente == 'Homolog') {
+                        if (env.ambiente == 'Homolog') {
                                 echo '### Homologacao'
                         } else {
                                 echo '### Outro'
