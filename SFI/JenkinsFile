@@ -27,7 +27,8 @@ pipeline {
         remote_url = "https://192.168.20.242/svn/SEFAT/SFI/branches/${params.BRANCH_NAME}"
 
         build_solution = "${env.local_branch}\\${env.solution_name}"
-        build_arguments = "/t:Publish /p:configuration=Debug /p:InstallURL=\"${env.path_hml}\" /p:assemblyname=\"${env.assembly_name_hml}\" /m:4 /v:quiet"
+        //build_arguments = "/t:Publish /p:configuration=Debug /p:InstallURL=\"${env.path_hml}\" /p:assemblyname=\"${env.assembly_name_hml}\" /m:4 /v:quiet"
+        build_arguments = "/t:Publish /p:configuration=Debug  /p:assemblyname=\"${env.assembly_name_hml}\" /m:4 /v:quiet"
 	}
     /*
     stages {
@@ -86,16 +87,16 @@ pipeline {
                 }
             }
         }
-        /*stage('Build & Sonar') {
+        stage('Build & Sonar') {
             steps{
                 bat """ 
-                    \"${tool 'Scanner MsBuild 5'}\\SonarScanner.MSBuild.exe\" begin /k:\"SFI\" /v:${params.BRANCH_NAME}
-                    \"${tool 'Msbuild 2017'}\\MSBuild.exe\" \"${env.build_solution}\" ${env.build_arguments}
-                    \"${tool 'Scanner MsBuild 5'}\\SonarScanner.MSBuild.exe\" end
+                   SonarScanner.MSBuild.exe\" begin /k:\"SFI\" /v:${params.BRANCH_NAME}
+                   MSBuild.exe\" \"${env.build_solution}\" ${env.build_arguments}
+                   SonarScanner.MSBuild.exe\" end
                     """
             }
-        }*/
-    }
+        }
+    
     post {
         always {
             echo "Build nro. ${env.BUILD_NUMBER} finalizada!"
