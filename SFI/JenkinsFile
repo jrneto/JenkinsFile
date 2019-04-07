@@ -29,29 +29,9 @@ pipeline {
         build_solution = "${env.local_branch}\\${env.solution_name}"
         build_arguments = "/t:Publish /p:configuration=Debug /p:InstallURL=\"${env.path_hml}\" /p:assemblyname=\"${env.assembly_name_hml}\" /m:4 /v:quiet"
 	}
-
-    stages {
-        //stage('Checkout GIT - CI'){
-        //    steps{
-        //        dir(env.repositorio_gndi_ci){
-        //            checkout(   changelog: false, 
-        //                        poll: false, 
-        //                        scm: [ $class: 'GitSCM', 
-        //                                branches: [[name: '*/master']], 
-        //                                doGenerateSubmoduleConfigurations: false, 
-        //                               extensions: [[$class: 'CloneOption', noTags: true, reference: '', shallow: true]],
-        //                                userRemoteConfigs: [[credentialsId: 'myGitCredential', url: 'https://github.com/jrneto/JenkinsFile.git']]])
-        //            
-        //        }
-        //    }
-        //}
     /*
-	stage('Test') {
-            steps {
-                echo 'Testing1...'
-            }
-        }    
-	    
+    stages {
+      
         stage('Checkout GIT - CI'){
             steps{
                  dir(env.repositorio_gndi_ci){
@@ -92,9 +72,7 @@ pipeline {
                 echo 'TODO Validando versão...'
                 echo 'Versão PRD: XXX'
                 echo 'Versão Deploy: XXX + 1'
-                bat """                                             
-                        MSBuild.exe \"${env.build_solution}\" ${env.build_arguments}                    
-                    """
+                
             }
         }
         
