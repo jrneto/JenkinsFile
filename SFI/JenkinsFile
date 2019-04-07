@@ -10,6 +10,7 @@ pipeline {
                 description: 'Nome da branch que ser&#225; executada a build da aplica&#231;&#227;o. Ex.: RB_GEVO-1234',
                 defaultValue: '',
                 trim: true)
+        choice(name: 'Ambiente',   description: 'Informe o ambiente de deploy', choices: ['QA','Homolog','PRD'])        
     }
 
     environment{
@@ -27,8 +28,8 @@ pipeline {
         remote_url = "https://192.168.20.242/svn/SEFAT/SFI/branches/${params.BRANCH_NAME}"
 
         build_solution = "${env.local_branch}\\${env.solution_name}"
-        //build_arguments = "/t:Publish /p:configuration=Debug /p:InstallURL=\"${env.path_hml}\" /p:assemblyname=\"${env.assembly_name_hml}\" /m:4 /v:quiet"
-        build_arguments = "/t:Publish /p:configuration=Debug  /p:assemblyname=\"${env.assembly_name_hml}\" /m:4 /v:quiet"
+        build_arguments = "/t:Publish /p:configuration=Debug /p:UpdateURL=\"${env.path_hml}\" /p:assemblyname=\"${env.assembly_name_hml}\" /m:4 /v:quiet"
+        //build_arguments = "/t:Publish /p:configuration=Debug  /p:assemblyname=\"${env.assembly_name_hml}\" /m:4 /v:quiet"
 	}
     
     stages {
