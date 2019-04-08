@@ -74,7 +74,7 @@ pipeline {
             steps{
                 dir(env.local_branch){  
                     script {
-                        echo '### ${params.Ambiente}'
+                        echo "### ${params.Ambiente}"
                         if (${params.Ambiente} == 'PRD') {                               
                             bat """                                             
                                 MSBuild.exe \"${env.build_solution_prd}\" ${env.build_arguments_prd}                    
