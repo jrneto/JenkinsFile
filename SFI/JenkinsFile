@@ -18,7 +18,7 @@ pipeline {
         assembly_name_hml = 'SFI - Homolog_CIT'
         assembly_name_prd = 'SEFAT - Sistema de Faturamento - v.4.0'
         path_hml = '\\\\ISS001W2PAS04\\Sistemas\\SEFAT\\HOMOLOGACAO\\SFI_CIT'
-        path_prd = '\\\\ISS001W2PAS04\Sistemas\SEFAT\PRE-PROD\SFI'
+        path_prd = '\\\\ISS001W2PAS04\\Sistemas\\SEFAT\\PRE-PROD\\SFI'
         server_domain = '\\\\iss001w2pas04'
 
         //repositorio_gndi_ci = "C:\\git_jrneto\\JenkinsFile"
