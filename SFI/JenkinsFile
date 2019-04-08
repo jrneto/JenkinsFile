@@ -99,6 +99,9 @@ pipeline {
             steps{
                 dir("${env.local_output_path}"){
                     withCredentials([usernamePassword(credentialsId: 'svnCredential', passwordVariable: 'PASSWORD', usernameVariable: 'USER')]) {
+                        echo "====++++XXXXXXXXXXXXX++++===="
+                        echo "%USER% %PASSWORD%"
+                        echo "====++++XXXXXXXXXXXXX++++===="
                         bat """
                             net use ${env.server_domain} /u:usrmgr\\%USER% %PASSWORD%
                             """
