@@ -78,12 +78,12 @@ pipeline {
                         if ("${params.Ambiente}" == 'PRD') {  
                             echo "### PRD ###"                             
                             bat """                                             
-                                MSBuild.exe \"${env.build_solution_prd}\" ${env.build_arguments_prd}                    
+                                MSBuild.exe \"${env.build_solution}\" ${env.build_arguments_prd}                    
                                 """        
                         } else {
                              echo "### HOMOLOG ###"
                              bat """                                             
-                                MSBuild.exe \"${env.build_solution_hml}\" ${env.build_arguments_hml}                    
+                                MSBuild.exe \"${env.build_solution}\" ${env.build_arguments_hml}                    
                                 """ 
                         }
                         
