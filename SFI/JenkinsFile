@@ -32,7 +32,7 @@ pipeline {
         build_arguments_hml = "/t:Publish /p:configuration=Debug /p:UpdateURL=\"${env.path_hml}\" /p:assemblyname=\"${env.assembly_name_hml}\" /m:4 /v:quiet"
         build_arguments_prd = "/t:Publish /p:configuration=Debug /p:UpdateURL=\"${env.path_prd}\" /p:assemblyname=\"${env.assembly_name_prd}\" /m:4 /v:quiet"
 
-        local_output_path = "${env.local_branch}\\bin\\Debug\\app.publish" 
+        local_output_path = "${env.local_branch}\\bin\\Debug\\app.publish\\" 
 	}
     
     stages {
