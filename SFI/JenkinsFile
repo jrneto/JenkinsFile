@@ -103,6 +103,7 @@ pipeline {
                         bat """
                             net use ${env.server_domain} /u:%USER% %PASSWORD%
                             """
+                        echo "====++++Inicio copia++++===="
                         fileOperations([
                             fileCopyOperation(
                                 excludes: "**/${env.assembly_name_hml}.exe", 
@@ -110,7 +111,7 @@ pipeline {
                                 includes: "**/*", 
                                 targetLocation: "${env.path_hml}")
                         ])
-                        
+                        echo "====++++Fim copia++++===="
                     }
                 }
             }
