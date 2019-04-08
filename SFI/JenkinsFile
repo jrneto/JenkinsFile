@@ -19,6 +19,7 @@ pipeline {
         assembly_name_prd = 'SEFAT - Sistema de Faturamento - v.4.0'
         path_hml = '\\\\ISS001W2PAS04\\Sistemas\\SEFAT\\HOMOLOGACAO\\SFI_CIT'
         path_prd = '\\\\ISS001W2PAS04\\Sistemas\\SEFAT\\Executaveis\\SEFAT_FW4'
+        server_domain = '\\\\iss001w2pas04'
 
         //repositorio_gndi_ci = "C:\\git_jrneto\\JenkinsFile"
         //repositorio_gndi_svn = "C:\\SVN\\SEFAT\\SFI\\branches"
@@ -30,6 +31,8 @@ pipeline {
         build_solution = "${env.local_branch}\\${env.solution_name}"
         build_arguments_hml = "/t:Publish /p:configuration=Debug /p:UpdateURL=\"${env.path_hml}\" /p:assemblyname=\"${env.assembly_name_hml}\" /m:4 /v:quiet"
         build_arguments_prd = "/t:Publish /p:configuration=Debug /p:UpdateURL=\"${env.path_prd}\" /p:assemblyname=\"${env.assembly_name_prd}\" /m:4 /v:quiet"
+
+        local_output_path = "${env.local_branch}\\bin\\Debug\\app.publish" 
 	}
     
     stages {
@@ -70,7 +73,7 @@ pipeline {
         }
         
         
-        stage('Build e Deploy') {
+        stage('Build') {
             steps{
                 dir(env.local_branch){  
                     script {
@@ -89,6 +92,25 @@ pipeline {
                         
                     }                  
                     
+                }
+            }
+        }
+        stage('Deploy') {
+            steps{
+                dir("${env.local_output_path}"){
+                    withCredentials([usernamePassword(credentialsId: 'svnCredential', passwordVariable: 'PASSWORD', usernameVariable: 'USER')]) {
+                        bat """
+                            net use ${env.server_domain} /u:usrmgr\\%USER% %PASSWORD%
+                            """
+                        fileOperations([
+                            fileCopyOperation(
+                                excludes: "**/${env.assembly_name_hml}.exe", 
+                                flattenFiles: false, 
+                                includes: "**/*", 
+                                targetLocation: "${env.path_hml}")
+                        ])
+                        
+                    }
                 }
             }
         }
