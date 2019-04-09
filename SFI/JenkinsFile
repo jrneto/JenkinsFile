@@ -105,12 +105,21 @@ pipeline {
                             net use ${env.server_domain} /u:%USER% %PASSWORD%
                             """
                         echo "====++++Inicio copia++++===="
-                        fileOperations([
-                            fileCopyOperation(
-                                flattenFiles: false, 
-                                includes: "**/*", 
-                                targetLocation: "${env.path_hml}")
-                        ])
+                        if ("${params.Ambiente}" == 'PRD') {  
+                            fileOperations([
+                                fileCopyOperation(
+                                    flattenFiles: false, 
+                                    includes: "**/*", 
+                                    targetLocation: "${env.path_prd}")
+                            ])    
+                        } else {
+                            fileOperations([
+                                fileCopyOperation(
+                                    flattenFiles: false, 
+                                    includes: "**/*", 
+                                    targetLocation: "${env.path_hml}")
+                            ])
+                        }
                         echo "====++++Fim copia++++===="
                     }
                 }
