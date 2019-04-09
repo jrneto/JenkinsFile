@@ -1,0 +1,36 @@
+pipeline {
+    agent any
+    stages {
+        stage('Listing') {
+            steps {
+                script{
+                    def browsers = ['chrome', 'firefox', 'internet explorer', 'opera', 'edge']
+
+                    echo 'Printing some elements of list:'
+                    for(int i = 0; i < browsers.size(); i++){
+                        echo "Testing the ${browsers[i]} browser"
+                    }
+                }
+            }
+        }
+        stage('List directory') {
+            steps {
+                echo 'Listing directory to a file'
+                sh "ls"
+            }
+        }
+        stage('Validation') {
+            steps {
+                echo 'Validating....'
+                script{
+                    if (true){
+                        echo "YEAH! It's true!"
+                    }
+                    else{
+                        echo "It's false"
+                    }
+                }
+            }
+        }
+    }
+}
