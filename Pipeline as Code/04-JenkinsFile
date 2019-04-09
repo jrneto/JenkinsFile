@@ -16,7 +16,7 @@ pipeline {
         stage('List directory') {
             steps {
                 echo 'Listing directory to a file'
-                bat "dir"
+                sh "ls"
             }
         }
         stage('Validation') {
