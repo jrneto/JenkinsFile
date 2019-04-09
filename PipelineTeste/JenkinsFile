@@ -30,7 +30,9 @@ pipeline {
             echo "Build finalizada!"
         }
         success {
-            echo "O build foi realizado com sucesso!"
+            echo "Deploy foi realizado com sucesso!"
+            echo "E-mail enviado para o PO."
+            echo "Código versionado na trunk"
         }
         failure {
             echo "Falha no processo de build. Analise o console log do build."
