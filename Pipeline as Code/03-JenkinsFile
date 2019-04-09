@@ -1,0 +1,32 @@
+pipeline {
+    agent any
+    parameters {
+        string(name: 'your_name', defaultValue: 'Nobody', description: "Hi, why you don't tell me your name?")
+        booleanParam(name: 'say_hello', defaultValue: true, description: "Be kind, say hello :)")
+        choice(name: 'super_power', choices: ['very fast', 'super Strong', 'elastic'], description: "Tell me your super power, is in the list?")
+        password(name: 'secret', defaultValue: 'secret', description: 'Say lowder, someone can be listening...')
+    }
+    stages {
+        stage('Appresentation') {
+            steps {
+                script{
+                    if(params.say_hello){
+                        echo "Hello there!"
+                    }
+                }
+                echo "My name is ${params.your_name}."
+            }
+        }
+        stage('Super power') {
+            steps {
+                echo "I can be ${params.super_power}"
+            }
+        }
+        stage('secret') {
+            steps {
+                echo "And you can't believe... i ${params.secret}"
+                echo "That is awesome!"
+            }
+        }
+    }
+}

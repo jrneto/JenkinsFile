@@ -1,0 +1,32 @@
+pipeline {
+    agent any
+    environment {
+        variavel_hello = "Hello Mr."
+        variavel_bye = "Bye Bye Mr."
+        variavel_end = "End of jenkinsfile Mr. ${env.nome}!"
+        nome = "Jonas"
+    }
+    stages {
+        stage('Hello Stage') {
+            environment {
+                nome = "Crowley"
+            }
+            steps {
+                echo "${env.variavel_hello} ${env.nome}!"
+            }
+        }
+        stage('Bye Stage') {
+            steps {
+                echo "${env.variavel_bye} ${env.nome}"
+            }
+        }
+        stage('End Stage') {
+            environment {
+                nome = "Dylan"
+            }
+            steps {
+                echo "${env.variavel_end}"
+            }
+        }
+    }
+}
