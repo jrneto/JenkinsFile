@@ -107,7 +107,6 @@ pipeline {
                         echo "====++++Inicio copia++++===="
                         fileOperations([
                             fileCopyOperation(
-                                excludes: "**/${env.assembly_name_hml}.exe", 
                                 flattenFiles: false, 
                                 includes: "**/*", 
                                 targetLocation: "${env.path_hml}")
